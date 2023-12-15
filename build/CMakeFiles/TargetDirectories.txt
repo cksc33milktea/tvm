@@ -1,0 +1,16 @@
+/home/xilinx/tvm/build/CMakeFiles/vta_fsim.dir
+/home/xilinx/tvm/build/CMakeFiles/vta_tsim.dir
+/home/xilinx/tvm/build/CMakeFiles/vta.dir
+/home/xilinx/tvm/build/CMakeFiles/tvm_objs.dir
+/home/xilinx/tvm/build/CMakeFiles/tvm_runtime_objs.dir
+/home/xilinx/tvm/build/CMakeFiles/tvm_libinfo_objs.dir
+/home/xilinx/tvm/build/CMakeFiles/tvm.dir
+/home/xilinx/tvm/build/CMakeFiles/tvm_runtime.dir
+/home/xilinx/tvm/build/CMakeFiles/project_libbacktrace.dir
+/home/xilinx/tvm/build/CMakeFiles/runtime.dir
+/home/xilinx/tvm/build/CMakeFiles/edit_cache.dir
+/home/xilinx/tvm/build/CMakeFiles/rebuild_cache.dir
+/home/xilinx/tvm/build/CMakeFiles/list_install_components.dir
+/home/xilinx/tvm/build/CMakeFiles/install.dir
+/home/xilinx/tvm/build/CMakeFiles/install/local.dir
+/home/xilinx/tvm/build/CMakeFiles/install/strip.dir
