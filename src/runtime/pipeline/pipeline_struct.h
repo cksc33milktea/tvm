@@ -1115,14 +1115,8 @@ class BackendRuntime : public BasicRuntime {
    */
   bool RunPipeline() {
 	  
-	auto tt1 = Clock::now();
-	  
     Run();
 	
-	auto tt2 = Clock::now();
-	
-	std::cout <<"stage"<<runtime_idx_<<" execution time of number "<<pipeline_execution_count_<<" time :"<< std::chrono::duration_cast<std::chrono::nanoseconds>(tt2 - tt1).count() << " ns or" \
-        <<std::chrono::duration_cast<std::chrono::nanoseconds>(tt2 - tt1).count()/1000000<< " ms" << std::endl;
 		
 	auto ttt1 = Clock::now();
 	
