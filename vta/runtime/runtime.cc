@@ -1495,14 +1495,9 @@ void VTAconv2d(VTACommandHandle cmd, int num, float* conv2d_input_1, float* conv
 	//src1->FlushCache1(0,conv2d_input_1_shape0*conv2d_input_1_shape1*conv2d_input_1_shape2*conv2d_input_1_shape3*4);
 	//src2->FlushCache1(0,conv2d_input_2_shape0*conv2d_input_2_shape1*conv2d_input_2_shape2*conv2d_input_2_shape3*4);
 	//dst1->FlushCache1(0,conv2d_output_shape0*conv2d_output_shape1*conv2d_output_shape2*conv2d_output_shape3*4);
-	auto t111 = Clock::now();
 	
 	VTADeviceRun_conv2d(static_cast<vta::CommandQueue*>(cmd)->device_,conv2d_input_1,conv2d_input_2,conv2d_output,H,W,ich,och,ksize,stride,turn);
 	
-	auto t222 = Clock::now();
-	
-	std::cout << "Convolution time: " << std::chrono::duration_cast<std::chrono::nanoseconds>(t222 - t111).count() << " ns or" \
-        <<std::chrono::duration_cast<std::chrono::nanoseconds>(t222 - t111).count()/1000000<< " ms" << std::endl;
 	//memcpy(conv2d_output,output,sizeof(float)*(conv2d_output_shape0*conv2d_output_shape1*conv2d_output_shape2*conv2d_output_shape3));
 	
 	
