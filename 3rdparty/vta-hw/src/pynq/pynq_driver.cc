@@ -159,8 +159,6 @@ class VTADevice {
 	  
 	  int base=100000;
 	  
-	  auto t1a = Clock::now();
-	  
 	  float* src1=(float*)VTAMemAlloc1(sizeof(float)*(i_ch*H*W+2*base),0);
 	  float* src2=(float*)VTAMemAlloc1(sizeof(float)*(i_ch*o_ch*ksize*ksize+2*base),0);
 	  //float* dst1=(float*)VTAMemAlloc1(sizeof(float)*(o_ch*H*W),0);
@@ -169,21 +167,10 @@ class VTADevice {
 	  cma_flush_cache(input2, VTAMemGetPhyAddr1(input2), i_ch*o_ch*ksize*ksize*4);
 	  cma_flush_cache(output, VTAMemGetPhyAddr1(output), o_ch*H*W*4);
 	  
-	  auto t2a = Clock::now();
-	
-	std::cout <<turn<< " Alloc+Flush time: " << std::chrono::duration_cast<std::chrono::nanoseconds>(t2a - t1a).count() << " ns or" \
-        <<std::chrono::duration_cast<std::chrono::nanoseconds>(t2a - t1a).count()/1000000<< " ms" << std::endl;
-	  
-	  
-	  auto t11 = Clock::now();
 	  
 	  VTAMemCopyFromHost1(src1+base,input1,sizeof(float)*(i_ch*H*W));
 	  VTAMemCopyFromHost1(src2,input2,sizeof(float)*(i_ch*o_ch*ksize*ksize));
 	  
-	  auto t22 = Clock::now();
-	
-	std::cout <<turn<< " Copy input time: " << std::chrono::duration_cast<std::chrono::nanoseconds>(t22 - t11).count() << " ns or" \
-        <<std::chrono::duration_cast<std::chrono::nanoseconds>(t22 - t11).count()/1000000<< " ms" << std::endl;
 		
 	uint32_t addr;
 	
@@ -210,37 +197,18 @@ class VTADevice {
 	
 	VTAWriteMappedReg(VTAMapRegister(addr),0x00,0x01);
 	
-	auto t111 = Clock::now();
-	
 	while((VTAReadMappedReg(VTAMapRegister(addr),0x00)&0x00000001)==1){
 		usleep(1000*10);
 	}
 	
-	auto t222 = Clock::now();
-	
-	std::cout <<turn<< " FPGA time: " << std::chrono::duration_cast<std::chrono::nanoseconds>(t222 - t111).count() << " ns or" \
-        <<std::chrono::duration_cast<std::chrono::nanoseconds>(t222 - t111).count()/1000000<< " ms" << std::endl;
-
-	  auto t1 = Clock::now();
 	  
 	  //VTAMemCopyFromHost1(output,dst1,sizeof(float)*(o_ch*H*W));
 	  
-	  auto t2 = Clock::now();
-	
-	//std::cout <<turn<< " Copy output time: " << std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count() << " ns or" \
-        <<std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count()/1000000<< " ms" << std::endl;
-	
-	
-	auto t1b = Clock::now();
 	
 	VTAMemFree1(src1);
 	VTAMemFree1(src2);
 	//VTAMemFree1(dst1);
 	
-	auto t2b = Clock::now();
-	
-	std::cout <<turn<< " Free time: " << std::chrono::duration_cast<std::chrono::nanoseconds>(t2b - t1b).count() << " ns or" \
-        <<std::chrono::duration_cast<std::chrono::nanoseconds>(t2b - t1b).count()/1000000<< " ms" << std::endl;
 	
     return 0;
   }
